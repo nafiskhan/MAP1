@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HDFC BANK</title>
+<script src="js/cordova-2.6.0.js"></script>
+<script type="js/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script type="text/javascript" charset="utf-8></script>
+<script language="javascript">
+
+function add()
+{
+
+	var name= window.localStorage.getItem("name");
+	var phone= window.localStorage.getItem("phone");
+	var gender= window.localStorage.getItem("gender");
+	var dob= window.localStorage.getItem("dob");
+	
+	//document.getElementById('name').innerHTML = name;
+	//document.getElementById('phone').innerHTML = phone;
+	//document.getElementById('dob').innerHTML = dob;
+	//document.getElementById('gender').innerHTML = gender;
+	
+	var element1 = document.createElement("input");
+	var nameBox = document.getElementById("nameBox");
+	element1.setAttribute("type","text");
+	element1.setAttribute("name", "name");
+	element1.setAttribute("value", name);
+	element1.setAttribute("disabled", true);
+	nameBox.appendChild(element1);
+	
+	var element2 = document.createElement("input");
+	var phoneBox = document.getElementById("phoneBox");
+	element2.setAttribute("type","text");
+	element2.setAttribute("name", "name");
+	element2.setAttribute("value", phone);
+	element2.setAttribute("disabled", true);
+	phoneBox.appendChild(element2);
+	
+	var element = document.createElement("input");
+	var dobBox = document.getElementById("dobBox");
+	element.setAttribute("type","text");
+	element.setAttribute("name", "dob");
+	element.setAttribute("value", dob);
+	element.setAttribute("disabled", true);
+	dobBox.appendChild(element);
+	
+	
+	
+	var element3 = document.createElement("input");
+	var genderBox = document.getElementById("genderBox");
+	element3.setAttribute("type","text");
+    element3.setAttribute("name", "gender");
+	//element3.setAttribut('label',gender);
+    element3.setAttribute("value", gender);
+	genderBox.appendChild(element3);
+
+	
+	
+	
+	
+	
+}
+
+
+function back()
+{
+	navigator.app.loadUrl('file:///android_asset/www/test.html');
+}
+
+
+
+function logOut()
+{
+	navigator.app.loadUrl('file:///android_asset/www/index.html');
+	navigator.notification.alert("Logged Out");
+}
+</script>
+</head>
+
+<body>
+<center>
+<br/><br/><br/>
+<img src="images/pagelogo.jpg">
+	
+	<input type="button" value="Get Data" onclick="add();"/>
+	<button onClick="back();">Back</button>
+	<button onClick="logOut();">Log Out</button>
+	<br><br/>
+	
+	<center>
+	
+		<table>
+			<tr>
+				<td>
+					Name
+				</td>
+				<td>
+					:
+				</td>
+				<td>
+					<p id="nameBox"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					DOB
+				</td>
+				<td>
+					:
+				</td>
+				<td>
+					<p id="dobBox"/>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					Phone
+				</td>
+				<td>
+					:
+				</td>
+				<td>
+					<p id="phoneBox"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					Gender
+				</td>
+				<td>
+					:
+				</td>
+				<td>
+					<p id="genderBox"/>
+				</td>
+			</tr>
+			
+		<table>
+		
+	</center>
+ 
+ 
+</body>
+
+
+</html>

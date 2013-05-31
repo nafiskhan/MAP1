@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Mobile Access Platform</title>
+
+	<style>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	</style>
+
+	<script src="js/cordova-2.6.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.datepick.css">
+	<script type="text/javascript" src="js/jquery.datepick.js"></script>
+	<link rel="stylesheet" href="css/jquery-ui.css" /> 
+	<link rel="stylesheet" href="/resources/demos/style.css" />
+	<script type="text/javascript">
+  $(function() {
+    $( "#accordion" ).accordion();
+  });
+	</script>
+	<script type="text/javascript">
+   $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+ </script>
+	<script type="text/javascript">
+		var TransferFundFrom;
+		var accountnumber;
+		var accounttype;
+		var bankname;
+		var city;
+		var nickname;
+		var amount;
+		var date;
+        function test()
+		{
+		alert("send data");
+		
+		var TransferFundFrom1=document.getElementById("TransferFundFrom").selectedIndex;
+		var TransferFundFrom2=document.getElementById("TransferFundFrom").options;
+		//var TransferFundFrom2=TransferFundFrom.options[TransferFundFrom.selectedIndex];
+		alert("TransferFundFrom"+TransferFundFrom2[TransferFundFrom1].value);
+		accountnumber = document.getElementById("accountnumber").value;
+		alert("accountnumber==="+accountnumber);
+		var accounttype1=document.getElementById("accounttype").selectedIndex;
+		var accounttype2=document.getElementById("accounttype").options;
+		alert("accounttype==="+accounttype2[accounttype1].value);
+		bankname = document.getElementById("bankname").value;
+		alert("bankname==="+bankname);
+		ifsccode = document.getElementById("ifsccode").value;
+		alert("ifsccode==="+ifsccode);
+		city = document.getElementById("city").value;
+		alert("city==="+city);
+		nickname = document.getElementById("nickname").value;
+	    alert("nickname==="+nickname);
+		amount = document.getElementById("amount").value;
+		alert("amount==="+amount);
+		date = document.getElementById("datepicker").value;
+		
+		alert(date  +"date======");
+  
+		var map={										//JSONObject
+					"TransferFundFrom" : TransferFundFrom2[TransferFundFrom1].value,
+					"accountnumber"    : accountnumber,
+					"accounttype"      : accounttype2[accounttype1].value,
+					"bankname"         : bankname,
+					"ifsccode"         : ifsccode,
+					"city"             : city,
+					"nickname"         : nickname,
+					"amount"           : amount,
+					"datepicker"       : date,
+								
+				};
+				alert(JSON.stringify(map));
+        	$.ajax({
+	        
+		url: 'http://192.168.11.44:8080/mapwebservices/nuc/map/mobbanking?json='+map,
+					
+				success: function(data) {
+				
+				if(data==0)
+				{
+					navigator.notification.alert("Server responses 0!!");
+				}
+				else{
+					//navigator.notification.alert("Successfully Logged In!!");
+
+					
+					navigator.notification.alert("Server has responded Something");
+				}
+				
+			},
+			error: function() {
+				
+				
+				navigator.notification.alert("Could not Connect to Server");
+				
+				
+			//something went wrong, handle the error and display a message
+			}
+			});
+			
+	}	
+	
+
+		
+	</script>
+	
+</head>
+
+<body bgcolor="#CFCFCF">
+<div style="background-color:#2480B1;" id="accordion">
+	<h3>Fund Transfer</h3>	
+	<div style="background-color:#F0F0F0;">			
+		<p>
+		<form action="">
+		<fieldset>
+		<table>
+			<tr>
+				<td>Transfer Fund from:</td>
+				<td>
+					<select id = "TransferFundFrom">
+					<option value = "Saving">Saving</option>
+					<option value = "Current">Current</option>
+					<option value = "Other">Other</option>
+					</select>			
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><br><b>Transfer Fund To:</b></td>
+			</tr>
+			<tr>
+				<td>Account Number:</td>
+				<td><input type="text" id ="accountnumber" size="30"></td>
+			</tr>
+			<tr>
+				<td>Account/Card Type:</td>
+				<td>
+					<select id = "accounttype">
+					<option value = "Saving/Debit">Saving/Debit</option>
+					<option value = "Current">Current</option>
+					</select>			   
+				</td>
+			</tr>
+			<tr>
+				<td>Bank Name:</td>
+				<td><input type="text" id="bankname" size="30"></td>
+			</tr>
+			<tr>
+				<td>IFSC Code:</td>
+				<td><input type="text" id="ifsccode" size="30"></td>
+			</tr>
+			<tr>
+				<td>City:</td>
+				<td><input type="text" id="city" size="30"></td>
+			</tr>
+			<tr>
+				<td>Nick Name:</td>
+				<td><input type="text" id="nickname" size="30"></td>
+			</tr>
+			<tr>
+				<td>Amount:</td>
+				<td><input type="text" id="amount" size="30"></td>
+			</tr>
+			<tr>
+				<td>Date:</td>
+				<td><input type="text" size="10" id="datepicker"></td>
+			</tr>
+		
+			<tr>				
+				<td colspan="2" align="center">
+				<button onclick="test()">Submit</button>
+				</td>
+			</tr>
+		</table>
+		</fieldset>
+		</form>
+		</p>
+	</div>
+	<h3 onclick="alert('account')">Account Summary</h3>
+	<div style="background-color:#F0F0F0;">			
+		<p>
+		<form action="">
+		<fieldset>
+		<table>
+			<tr>
+
+				<td>Withdrawable Balance:</td>
+				<td><input type="text" id="withdrawablebalance" size="30"></td>
+			</tr>
+			<tr>
+				<td>Closing Balance:</td>
+				<td><input type="text" id="closingbalance" size="30"></td>
+			</tr>
+			<tr>
+				<td>Line Amount:</td>
+				<td><input type="text" id="lineamount" size="30"></td>
+			</tr>
+			<tr>
+				<td>Fund in Clearing:</td>
+				<td><input type="text" id="fundclearing" size="30"></td>
+			</tr>
+			<tr>
+				<td>Multideposit Balance:</td>
+				<td><input type="text" id="multidepositbalance" size="30"></td>
+			</tr>
+		</table>
+		</fieldset>
+		</form>
+		</p>
+	</div>
+	<h3 onclick="alert('transactions')">Mini Statement</h3>	  
+	<div style="background-color:#F0F0F0;">
+		<p>
+		 Last Five transaction details
+		</p>		
+	</div>  
+</div>
+</body>
+</html>
